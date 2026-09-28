@@ -1,117 +1,168 @@
-const caixaPrincipal = document.querySelector(".caixa-principal");
-const caixaPerguntas = document.querySelector(".caixa-perguntas");
-const caixaAlternativas = document.querySelector(".caixa-alternativas");
-const caixaResultado = document.querySelector(".caixa-resultado");
-const textoResultado = document.querySelector(".texto-resultado");
+const caixaPerguntas = document.getElementById("caixa-perguntas");
+const caixaAlternativas = document.getElementById("caixa-alternativas");
+const caixaResultado = document.getElementById("caixa-resultado");
+const textoResultado = document.getElementById("texto-resultado");
+const badgePerfil = document.getElementById("badge-perfil");
+const barraProgresso = document.getElementById("barra-progresso");
+const btnReiniciar = document.getElementById("btn-reiniciar");
+
+const autor = "Henrique Martins De Oliveira";
 
 const perguntas = [
     {
-        enunciado: "Assim que saiu da escola você se depara com uma nova tecnologia, um chat que consegue responder todas as dúvidas que uma pessoa pode ter, ele também gera imagens e áudios hiper-realistas. Qual o primeiro pensamento?",
+        enunciado: "Assim que saiu da escola você se depara com uma nova tecnologia: um chat que responde todas as dúvidas, gera imagens e áudios hiper-realistas. Qual o seu primeiro pensamento?",
         alternativas: [
             {
-                texto: "Isso é assustador!",
-                afirmacao: "afirmacao"
+                texto: "Isso é assustador! Pode ser perigoso se usado sem limites.",
+                afirmacao: "Sua jornada começou com cautela e preocupação com os limites éticos da tecnologia.",
+                pontosIA: 0
             },
             {
-                texto: "Isso é maravilhoso!",
-                afirmacao: "afirmacao"
+                texto: "Isso é maravilhoso! As possibilidades de criação são infinitas.",
+                afirmacao: "Sua jornada começou com entusiasmo e abertura total para a inovação.",
+                pontosIA: 1
             }           
-            
         ]
     },
     {
-        enunciado: "Com a descoberta desta tecnologia, chamada Inteligência Artificial (IA), uma professora de tecnologia da escola decidiu fazer uma sequência de aulas sobre elaIA. No fim de uma aula ela pede que você escreva um trabalho sobre o uso de tecnologia em sala de aula. Qual atitude você toma?",
+        enunciado: "Sua professora de tecnologia pediu um trabalho sobre o impacto da IA na educação. Qual atitude você toma?",
         alternativas: [
             {
-                texto:"Utilizar uma ferramenta de busca na internet que utiliza IA para que ela ajude a encontrar informações relevantes para o trabalho e explique numa linguagem que facilite o entendimento",
-                afirmacao:"afirmacao"
+                texto: "Utilizo ferramentas de IA para sintetizar conceitos difíceis e organizar a estrutura da pesquisa.",
+                afirmacao: "Você adotou a IA como um copiloto para otimizar sua aprendizagem e economizar tempo.",
+                pontosIA: 1
             },
             {
-                texto: "Escrever o trabalho com base nas conversas que teve com colegas, algumas pesquisas na internet e conhecimentos próprios sobre o tema.",
-                afirmacao:"afirmacao"
+                texto: "Escrevo com base em debates, livros e reflexões próprias para manter a originalidade intacta.",
+                afirmacao: "Você priorizou o esforço autoral e o pensamento crítico tradicional.",
+                pontosIA: 0
             }
         ]
     },
     {
-        enunciado: "Após a elaboração do trabalho, a professora realizou um debate entre a turma para entender como foi realizada a pesquisa e escrita. Nessa conversa também foi levantado um ponto muito importante: como a IA impacta o trabalho do futuro. Nesse debate, como você se posiciona?",
+        enunciado: "Em um debate sobre o impacto da IA nos empregos do futuro, como você defende o seu ponto de vista?",
         alternativas: [
             {
-                texto:"Me preocupo com as pessoas que perderão seus empregos para máquinas e defendem a importância de proteger os trabalhadores.",
-                afirmacao:"afirmacao"
+                texto: "Defendo que a automação precisa de regulamentação para proteger os trabalhadores vulneráveis.",
+                afirmacao: "No debate social, focou na empatia humana e na necessidade de segurança do trabalho.",
+                pontosIA: 0
             },
             {
-                texto:"Defende a ideia de que a IA pode criar novas oportunidades de emprego e melhorar habilidades humanas.",
-                afirmacao:"afirmacao"
+                texto: "Defendo que a IA criará novas profissões e aumentará o potencial produtivo humano.",
+                afirmacao: "No debate social, defendeu a evolução contínua do mercado e a adaptação tecnológica.",
+                pontosIA: 1
             }
-            
         ]
     },
     {
-        enunciado: "Ao final da discussão, você precisou criar uma imagem no computador que representasse o que pensa sobre IA. E agora?",
+        enunciado: "Para ilustrar sua visão sobre a IA, você precisa entregar uma arte visual. Como decide produzi-la?",
         alternativas: [
             {
-                texto:"Criar uma imagem utilizando uma plataforma de design como o Paint.",
-                afirmacao:"afirmacao"
+                texto: "Desenho e edito manualmente a imagem do zero em um software tradicional.",
+                afirmacao: "Sua expressão artística permaneceu artesanal e puramente autoral.",
+                pontosIA: 0
             },
             {
-                texto:"Criar uma imagem utilizando um gerador de imagem de IA.",
-                afirmacao:"afirmacao"
+                texto: "Utilizo um gerador de imagens por IA ajustando comandos detalhados (prompts).",
+                afirmacao: "Sua expressão artística explorou a sinergia entre prompts e inteligência gerativa.",
+                pontosIA: 1
             }
-            
         ]
     },
     {
-        enunciado: " Você tem um trabalho em grupo de biologia para entregar na semana seguinte, o andamento do trabalho está um pouco atrasado e uma pessoa do seu grupo decidiu fazer com ajuda de uma IA. O problema é que o trabalho está totalmente igual ao do chat. O que você faz?",
+        enunciado: "Em um trabalho em grupo de Biologia, um colega gerou todo o texto usando IA sem ao menos revisar o conteúdo. O que você faz?",
         alternativas: [
             {
-                texto: "O chat pode ser uma tecnologia muito avançada, mas é preciso manter a atenção pois toda máquina erra, por isso revisar o trabalho e contribuir com as perspectivas pessoais é essencial.",
-                afirmacao:"afirmacao"
+                texto: "Alertamos o grupo de que a IA comete erros e precisamos revisar e reescrever com nossas palavras.",
+                afirmacao: "No fim, provou que a revisão humana e o rigor crítico são indispensáveis.",
+                pontosIA: 0
             },
             {
-                texto: "Escrever comandos para o chat é uma forma de contribuir com o trabalho, por isso não é um problema utilizar o texto inteiro.",
-                afirmacao:"afirmacao"
+                texto: "Aceitamos o texto como está, pois dominar a escrita de comandos já é contribuição suficiente.",
+                afirmacao: "No fim, optou por delegar a execução textual inteiramente à automação.",
+                pontosIA: 1
             }
-            
-            
         ]
-    },
+    }
 ];
 
-let atual = 0; 
-let perguntaAtual;
-let historiaFinal = "";
+let atual = 0;
+let historiaFinal = [];
+let pontuacaoIA = 0;
+
+function iniciaJogo() {
+    atual = 0;
+    historiaFinal = [];
+    pontuacaoIA = 0;
+    caixaResultado.classList.add("escondido");
+    caixaPerguntas.classList.remove("escondido");
+    caixaAlternativas.classList.remove("escondido");
+    mostraPergunta();
+}
 
 function mostraPergunta() {
-    if(atual >= perguntas.length){
+    if (atual >= perguntas.length) {
         mostraResultado();
         return;
     }
-    perguntaAtual = perguntas[atual];
+    
+    const porcentagem = (atual / perguntas.length) * 100;
+    barraProgresso.style.width = `${porcentagem}%`;
+
+    const perguntaAtual = perguntas[atual];
+    
+    caixaPerguntas.classList.remove("faded-in");
+    void caixaPerguntas.offsetWidth;
+    caixaPerguntas.classList.add("faded-in");
+
     caixaPerguntas.textContent = perguntaAtual.enunciado;
     caixaAlternativas.textContent = "";
-    mostraAlternativas();
+    
+    mostraAlternativas(perguntaAtual);
 }
 
-function mostraAlternativas(){
-    for(const alternativa of perguntaAtual.alternativas){
-        const botaoAlternativas = document.createElement("button");
-        botaoAlternativas.textContent = alternativa.texto;
-        botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
-        caixaAlternativas.appendChild(botaoAlternativas);
+function mostraAlternativas(pergunta) {
+    for (const alternativa of pergunta.alternativas) {
+        const botao = document.createElement("button");
+        botao.classList.add("btn-opcao", "faded-in");
+        botao.textContent = alternativa.texto;
+        botao.addEventListener("click", () => respostaSelecionada(alternativa));
+        caixaAlternativas.appendChild(botao);
     }
 }
 
-function respostaSelecionada(opcaoSelecionada){
-    const afirmacoes = opcaoSelecionada.afirmacao;
-    historiaFinal += afirmacoes + " ";
+function respostaSelecionada(opcao) {
+    historiaFinal.push(opcao.afirmacao);
+    pontuacaoIA += opcao.pontosIA;
     atual++;
     mostraPergunta();
 }
 
-function mostraResultado(){
-    caixaPerguntas.textContent = "Em 2049...";
-    textoResultado.textContent = historiaFinal;
-    caixaAlternativas.textContent = ""; 
+function mostraResultado() {
+    barraProgresso.style.width = "100%";
+    caixaPerguntas.classList.add("escondido");
+    caixaAlternativas.classList.add("escondido");
+    caixaResultado.classList.remove("escondido");
+    caixaResultado.classList.add("faded-in");
+
+    let perfil = "";
+    if (pontuacaoIA >= 4) {
+        perfil = "🚀 Perfil: Entusiasta & Pioneiro Tech";
+    } else if (pontuacaoIA >= 2) {
+        perfil = "⚖️ Perfil: Moderado & Estratégico";
+    } else {
+        perfil = "🛡️ Perfil: Defensor do Humanismo Crítico";
+    }
+
+    badgePerfil.textContent = perfil;
+    
+    // Adiciona o seu crédito diretamente no resultado
+    textoResultado.innerHTML = `
+        <strong>Sua trajetória calculada pelo projeto de ${autor}:</strong><br><br>
+        ${historiaFinal.join("<br><br>")}
+    `;
 }
 
-mostraPergunta();
+btnReiniciar.addEventListener("click", iniciaJogo);
+
+iniciaJogo();

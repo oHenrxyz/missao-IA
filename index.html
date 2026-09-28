@@ -3,18 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Você decide o futuro da IA</title>
+    <!-- Fonte moderna do Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>Voce decide o futuro da IA</title>
 </head>
 <body>
-    <div class="caixa-principal">
-        <h1>Voce decide o futuro da IA</h1>
-        <div class="caixa-perguntas"></div>
-        <div class="caixa-alternativas"></div>
-        <div class="caixa-resultado">
-            <p class="texto-resultado"></p>
+    <div class="cartao-container">
+        <!-- Barra de Progresso Superior -->
+        <div class="container-progresso">
+            <div class="barra-progresso" id="barra-progresso"></div>
         </div>
+
+        <header>
+            <span class="badge-tag">Simulador Futurista</span>
+            <h1>Você Decide o Futuro da IA</h1>
+            <!-- Créditos do Autor no Topo -->
+            <p class="autor-tag">Desenvolvido por <span>Henrique Martins De Oliveira</span></p>
+        </header>
+
+        <main class="conteudo-card">
+            <!-- Caixa de Perguntas -->
+            <div class="caixa-perguntas" id="caixa-perguntas"></div>
+
+            <!-- Caixa de Alternativas -->
+            <div class="caixa-alternativas" id="caixa-alternativas"></div>
+
+            <!-- Caixa de Resultado -->
+            <div class="caixa-resultado escondido" id="caixa-resultado">
+                <div class="badge-perfil" id="badge-perfil">Seu Perfil</div>
+                <p class="texto-resultado" id="texto-resultado"></p>
+                <button class="btn-reiniciar" id="btn-reiniciar">Jogar Novamente ↺</button>
+            </div>
+        </main>
+
+        <!-- Rodapé do Projeto -->
+        <footer>
+            <p>© Projeto de IA — Criado por <strong>Henrique Martins De Oliveira</strong></p>
+        </footer>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
